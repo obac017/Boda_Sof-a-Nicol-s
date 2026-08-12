@@ -143,18 +143,26 @@
     justify-content:center;
     position:relative;
     padding:60px 24px;
+    text-align:center;
+  }
+  .story-frame > div{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
   }
   .photo-placeholder{
-    width:min(420px, 82vw);
-    aspect-ratio:4/5;
+    width:min(420px, 90vw);
+    height:auto;
+    aspect-ratio:auto !important;
     border-radius:6px;
-    background:
-      linear-gradient(160deg, var(--blue-soft), var(--blue) 60%, var(--green) 140%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    background:transparent;
+    display:block;
     position:relative;
+    overflow:hidden;
     box-shadow:0 24px 50px -20px rgba(60,58,50,0.35);
+    margin-left:auto;
+    margin-right:auto;
   }
   .photo-placeholder .cam{
     width:34px;height:34px;stroke:rgba(255,255,255,.85);fill:none;stroke-width:1.3;
@@ -169,8 +177,8 @@
   }
   .photo-placeholder img{
     width:100%;
-    height:100%;
-    object-fit:cover;
+    height:auto;
+    object-fit:contain;
     display:block;
     border-radius:6px;
   }
@@ -252,6 +260,13 @@
     text-align:center;
     position:relative;
   }
+  .chapter > *{
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .chapter .place{
+    max-width:760px;
+  }
   .chapter-kicker{
     font-family:'Cormorant Garamond', serif;
     font-style:italic;
@@ -290,7 +305,15 @@
     gap:60px;
     margin-top:40px;
   }
-  .celebra-block{max-width:280px;}
+  .celebra-block{
+    max-width:340px;
+    width:min(100%, 340px);
+    text-align:center;
+  }
+  .celebra-block .place{
+    margin-left:auto;
+    margin-right:auto;
+  }
   .celebra-block .time{margin-bottom:2px;}
 
   .como-llegar-btn{
@@ -319,29 +342,35 @@
   /* ---------- CARRUSEL ---------- */
   .carousel{
     position:relative;
-    width:min(280px, 82vw);
-    aspect-ratio:4/5;
+    width:min(340px, 86vw);
+    height:auto;
+    aspect-ratio:auto !important;
     border-radius:6px;
     overflow:hidden;
     margin:0 auto;
     box-shadow:0 24px 50px -20px rgba(60,58,50,0.35);
+    background:transparent;
+    transition:height .45s ease;
   }
   .carousel .slide{
     position:absolute;
     inset:0;
     opacity:0;
     transition:opacity .6s ease;
-    background:linear-gradient(160deg, var(--blue-soft), var(--blue) 60%, var(--green) 140%);
+    background:transparent;
     display:flex;
     align-items:center;
     justify-content:center;
+    pointer-events:none;
   }
   .carousel .slide.active{opacity:1;}
   .carousel .slide img{
     width:100%;
-    height:100%;
-    object-fit:cover;
+    height:auto;
+    max-height:none;
+    object-fit:contain;
     display:block;
+    border-radius:6px;
   }
   .carousel .slide .cam{width:30px;height:30px;stroke:rgba(255,255,255,.85);fill:none;stroke-width:1.3;}
   .carousel .slide .cap{
@@ -408,23 +437,42 @@
     flex-wrap:wrap;
   }
   .dress-card{
-    width:180px;
-    height:240px;
+    width:min(220px, 42vw);
+    height:auto;
     border-radius:6px;
-    background:linear-gradient(165deg, var(--blue-soft), var(--blue));
+    background:transparent;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:flex-end;
-    padding-bottom:16px;
+    position:relative;
+    overflow:hidden;
+    padding:0;
+  }
+  .dress-card img{
+    position:static !important;
+    inset:auto !important;
+    width:100% !important;
+    height:auto !important;
+    object-fit:contain !important;
+    display:block;
+    border-radius:6px;
   }
   .dress-card svg{width:56px;height:110px;stroke:var(--ink);stroke-width:1.1;fill:none;opacity:.75;}
   .dress-card span{
-    margin-top:10px;
+    position:absolute;
+    left:50%;
+    bottom:10px;
+    transform:translateX(-50%);
+    margin:0;
     font-size:11px;
     letter-spacing:2px;
-    color:var(--ink-soft);
+    color:#fff;
+    background:rgba(0,0,0,.35);
+    padding:4px 10px;
+    border-radius:20px;
     text-transform:uppercase;
+    white-space:nowrap;
   }
   #vestimenta .note{
     max-width:440px;
@@ -533,8 +581,47 @@
   }
 
   @media (max-width:600px){
+    .story-frame{
+      padding:48px 16px;
+    }
+    .photo-placeholder{
+      width:min(100%, 420px);
+    }
+    .story-phrase{
+      width:100%;
+      max-width:360px;
+      margin-top:24px;
+      font-size:clamp(20px, 6vw, 25px);
+      line-height:1.45;
+    }
+    .chapter{
+      padding:78px 16px;
+    }
+    .chapter .place{
+      max-width:360px;
+      line-height:1.5;
+    }
     .cd-hms{gap:16px;}
-    .celebra-split{gap:36px;}
+    .celebra-split{
+      gap:44px;
+      align-items:center;
+    }
+    .celebra-block{
+      width:min(100%, 340px);
+    }
+    .carousel{
+      width:min(100%, 340px);
+    }
+    .dress-refs{
+      gap:24px;
+    }
+    .dress-card{
+      width:min(190px, 42vw);
+    }
+    #itinerario{
+      padding-left:18px;
+      padding-right:18px;
+    }
   }
 </style>
 </head>
@@ -589,7 +676,7 @@
     <p class="eyebrow">Nuestra historia comienza aquí</p>
     <h1>Sofía &amp; Nicolás</h1>
     <p class="date-big">03.10.2026</p>
-    <div class="photo-placeholder" style="width:min(280px,70vw); aspect-ratio:4/5; margin:24px auto 0;">
+    <div class="photo-placeholder" style="width:min(280px,70vw); margin:24px auto 0;">
       <img src="boda codigo/imagen 3.jpg" alt="Sofía y Nicolás">
     </div>
     <p class="photog" style="margin-top:16px;">Fotografía · Estudio Luz Natural</p>
@@ -630,7 +717,7 @@
     <h2>Nos damos el sí</h2>
     <p class="time">11:00 A. M.</p>
     <p class="place">Iglesia de San Andrés · <a href="https://www.google.com/maps/place/Parroquia+San+Andr%C3%A9s+Ap%C3%B3stol/@1.2171704,-77.2840873,817m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8e2ed4812629e85d:0x7a9f11d6c64f60e8!8m2!3d1.217165!4d-77.2815124!16s%2Fg%2F11ckdsbkdt?entry=ttu&g_ep=EgoyMDI2MDgwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">📍 Cómo llegar</a></p>
-    <div class="photo-placeholder" style="aspect-ratio:5/4;">
+    <div class="photo-placeholder">
       <img src="boda codigo/imagen 4.jpg" alt="Iglesia de San Andrés">
     </div>
   </section>
@@ -677,11 +764,11 @@
     <h2>Elegante</h2>
     <div class="dress-refs">
       <div class="dress-card" style="justify-content:flex-end; overflow:hidden; position:relative;">
-        <img src="boda codigo/imagen 11.jpg" alt="Referencia elegante ella" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:6px;">
+        <img src="boda codigo/imagen 11.jpg" alt="Referencia elegante ella" style="position:absolute; inset:0; width:100%; height:auto; object-fit:contain; border-radius:6px;">
         <span style="position:relative; z-index:1; background:rgba(0,0,0,.35); color:#fff; padding:4px 10px; border-radius:20px; margin-bottom:10px;">Ella</span>
       </div>
       <div class="dress-card" style="justify-content:flex-end; overflow:hidden; position:relative;">
-        <img src="boda codigo/imagen 12.jpg" alt="Referencia elegante él" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:6px;">
+        <img src="boda codigo/imagen 12.jpg" alt="Referencia elegante él" style="position:absolute; inset:0; width:100%; height:auto; object-fit:contain; border-radius:6px;">
         <span style="position:relative; z-index:1; background:rgba(0,0,0,.35); color:#fff; padding:4px 10px; border-radius:20px; margin-bottom:10px;">Él</span>
       </div>
     </div>
@@ -728,7 +815,7 @@
 
   <!-- Cierre -->
   <section id="final" class="reveal">
-    <div class="photo-placeholder" style="width:min(360px,80vw); aspect-ratio:4/5;">
+    <div class="photo-placeholder" style="width:min(360px,80vw);">
       <img src="boda codigo/imagen 13.jpg" alt="Sofía y Nicolás">
     </div>
     <p class="quote">"Lo más bonito de este día será compartirlo con ustedes."</p>
@@ -776,6 +863,26 @@
   setInterval(tick, 1000);
 
   // Carruseles de fotos
+  function sizeCarouselToImage(car, index){
+    var slides = car.querySelectorAll('.slide');
+    var img = slides[index] && slides[index].querySelector('img');
+    if(!img) return;
+
+    function applySize(){
+      if(img.naturalWidth && img.naturalHeight){
+        var width = car.clientWidth;
+        var height = width * (img.naturalHeight / img.naturalWidth);
+        car.style.height = Math.round(height) + 'px';
+      }
+    }
+
+    if(img.complete){
+      applySize();
+    }else{
+      img.addEventListener('load', applySize, {once:true});
+    }
+  }
+
   function initCarousels(){
     document.querySelectorAll('[data-carousel]').forEach(function(car){
       var slides = car.querySelectorAll('.slide');
@@ -787,6 +894,13 @@
         dotsWrap.appendChild(dot);
       });
       car.dataset.index = 0;
+      sizeCarouselToImage(car, 0);
+    });
+
+    window.addEventListener('resize', function(){
+      document.querySelectorAll('[data-carousel]').forEach(function(car){
+        sizeCarouselToImage(car, parseInt(car.dataset.index || 0, 10));
+      });
     });
   }
 
@@ -798,6 +912,7 @@
     slides.forEach(function(s, i){ s.classList.toggle('active', i === newIndex); });
     dots.forEach(function(d, i){ d.classList.toggle('active', i === newIndex); });
     car.dataset.index = newIndex;
+    sizeCarouselToImage(car, newIndex);
   }
 
   function carouselMove(btn, dir){
